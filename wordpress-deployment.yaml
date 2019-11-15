@@ -12,6 +12,19 @@ spec:
     tier: frontend
   type: LoadBalancer
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wordpress-pv-claim
+  labels:
+    app: wordpress
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -47,5 +60,5 @@ spec:
           mountPath: /var/www/html
       volumes:
       - name: s2
-        hostPath:
-          path: /developer/s2
+        persistentVolumeClaim:
+          claimName: wordpress-pv-claim
