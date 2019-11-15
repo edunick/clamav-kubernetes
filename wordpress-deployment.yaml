@@ -48,4 +48,4 @@ spec:
       volumes:
       - name: s2
         hostPath:
-          path: /developer/s1
+          path: /developer/s2
